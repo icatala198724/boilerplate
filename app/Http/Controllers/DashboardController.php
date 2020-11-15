@@ -15,7 +15,7 @@ class DashboardController extends Controller
         $roles = Role::all();
         $data = array('usuariosRegistrados' => count($usuarios),
                         'usuariosActivos' => count($usuariosActivos),
-                        'rolesRegistrados' => count($roles),);
+                        'rolesRegistrados' => count($roles));
                         return $data;
     }
 }
