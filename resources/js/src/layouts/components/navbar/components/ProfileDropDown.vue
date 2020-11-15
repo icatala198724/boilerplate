@@ -1,15 +1,10 @@
 <template>
 <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.displayName">
 
-    <div class="text-right leading-tight hidden sm:block">
-        <p class="font-semibold">{{ activeUserInfo.displayName }}</p>
-        <small>Available</small>
-    </div>
-
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
-
-        <div class="con-img ml-3">
-            <img v-if="activeUserInfo.photoURL" key="onlineImg" :src="activeUserInfo.photoURL" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
+        <div class="text-right leading-tight hidden sm:block">
+            <p class="font-semibold">{{ nombre }} {{apellidos}}</p>
+            <small>Online</small>
         </div>
 
         <vs-dropdown-menu class="vx-navbar-dropdown">
@@ -53,7 +48,21 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+    data() {
+        return {
+            nombre: '',
+            apellidos: ''
+        }
+    },
+    mounted() {
+        /*f (localStorage.access_token) {
+            console.log("mi token es:" + localStorage.access_token)
+        }*/
+        this.cargarUsuario()
+
+    },
     computed: {
         activeUserInfo() {
             return this.$store.state.AppActiveUser
@@ -68,6 +77,24 @@ export default {
                 });
             });
 
+        },
+        cargarUsuario() {
+            var url = "/api/auth/user"
+            axios.get(url, {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.access_token
+                    }
+                })
+                .then(response => {
+                    console.log(response.data.username)
+                    this.nombre = response.data.firstName
+                    this.apellidos = response.data.lastName
+
+                })
+                .catch(error => {
+                    console.log(error)
+
+                })
         }
     }
 }
