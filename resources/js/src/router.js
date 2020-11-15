@@ -52,13 +52,29 @@ const router = new Router({
                 name: 'users-edit',
                 component: () => import('./views/users/edit/UserSettings.vue')
               },
+              
+              {
+                path: '/roles',
+                name: 'roles.index',
+                component: () => import('./views/roles/index.vue')
+              },
+              {
+                path: '/roles/create',
+                name: 'roles.create',
+                component: () => import('./views/roles/create.vue')
+              },
+              {
+                path: '/roles/edit/:id',
+                name: 'roles.edit',
+                component: () => import('./views/roles/edit.vue')
+              },
             ],
         },
     // =============================================================================
     // FULL PAGE LAYOUTS
     // =============================================================================
         {
-            path: '',
+            path: '', 
             component: () => import('@/layouts/full-page/FullPage.vue'),
             children: [
         // =============================================================================

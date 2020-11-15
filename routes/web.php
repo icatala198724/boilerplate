@@ -23,6 +23,14 @@ Route::group(['prefix' => 'api'], function() {
         Route::post('/admin/users/update','UsersController@update');
         Route::post('/admin/users/changePassword','UsersController@changePassword');
         Route::get('/admin/dashboard/getEstadisticas','DashboardController@getEstadisticas');
+        Route::get('/admin/roles/getRoles','AdminController@getRoles');
+        Route::post('/admin/roles/store','AdminController@store');
+        Route::post('/admin/roles/delete','AdminController@delete');
+        Route::post('/admin/roles/update','AdminController@update');
+        Route::post('/admin/roles/search','AdminController@search');
+
+
+
     });
     
 });
