@@ -34,7 +34,10 @@ const router = new Router({
               {
                 path: '/',
                 name: 'home',
-                component: () => import('./views/Home.vue')
+                component: () => import('./views/Home.vue'),
+                meta: {
+                  requiresAuth: true,
+                }
               },
               
               {
@@ -82,7 +85,7 @@ const router = new Router({
         // =============================================================================
               {
                 path: '/pages/login',
-                name: 'page-login',
+                name: 'login',
                 component: () => import('@/views/pages/Login.vue')
               },
               {
