@@ -32,12 +32,6 @@ export default [
         slug: "roles",
         icon: "SmileIcon",
       },
-      {
-        url: "/permisos",
-        name: "Permisos",
-        slug: "permisos",
-        icon: "SlidersIcon",
-      },
 
     ]
   },
