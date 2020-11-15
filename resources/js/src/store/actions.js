@@ -6,7 +6,7 @@
   Author: Pixinvent
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
-
+import axios from 'axios'
 const actions = {
 
     // /////////////////////////////////////////////
@@ -52,12 +52,14 @@ const actions = {
     retrieveToken(context, credentials) {
 
       return new Promise((resolve, reject) => {
-        axios.post('/api/login', {
-          username: credentials.username,
+        console.log('pruebas api:'+credentials.username)
+        console.log('pruebas api:'+credentials.password)
+        axios.post('/api/auth/login', {
+          email: credentials.username,
           password: credentials.password,
         })
           .then(response => {
-            //console.log(response)
+            console.log('Respuesa'+response)
             const token = response.data.access_token
             localStorage.setItem('access_token', token)
             context.commit('retrieveToken', token)
@@ -65,7 +67,7 @@ const actions = {
             resolve(response)
           })
           .catch(error => {
-            //console.log(error)
+            console.log("ERROR"+error)
             reject(error)
           })
       })
@@ -76,7 +78,8 @@ const actions = {
       if (context.getters.loggedIn){
         
         return new Promise((resolve, reject) => {
-          axios.post('/api/logout', '', {
+          console.log('token:'+context.state.token )
+          axios.get('/api/auth/logout', {
               headers: { Authorization: "Bearer " + context.state.token }
             })
             .then(response => {

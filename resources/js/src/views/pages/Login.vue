@@ -93,15 +93,15 @@ export default {
     },
     methods: {
         login() {
-            console.log('login')
+            console.log('login' + this.email)
             this.$store
                 .dispatch("retrieveToken", {
-                    username: this.username,
+                    username: this.email,
                     password: this.password
                 })
                 .then(response => {
                     this.$router.push({
-                        name: "dashboard"
+                        name: "home"
                     });
                 })
                 .catch(error => {
